@@ -18,15 +18,7 @@ public class CoupleByCriteriaFinder {
 
         for (int i = 0; i < people.size() - 1; i++) {
             for (int j = i + 1; j < people.size(); j++) {
-                Couple couple = new Couple();
-                if (people.get(i).birthDate().isBefore(people.get(j).birthDate())) {
-                    couple.setYoungest(people.get(i));
-                    couple.setOldest(people.get(j));
-                } else {
-                    couple.setYoungest(people.get(j));
-                    couple.setOldest(people.get(i));
-                }
-                coupleCombinations.add(couple);
+                coupleCombinations.add(Couple.create(people.get(i), people.get(j)));
             }
         }
 
