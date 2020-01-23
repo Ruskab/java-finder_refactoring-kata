@@ -25,6 +25,7 @@ public class CoupleByCriteriaFinderTests {
         CoupleByCriteriaFinder finder = new CoupleByCriteriaFinder(list);
 
         Optional<Couple> couple = finder.find(Criteria.Closest);
+
         assertEquals(Optional.empty(), couple);
     }
 
@@ -32,7 +33,6 @@ public class CoupleByCriteriaFinderTests {
     public void Returns_Empty_Couple_When_Given_One_Person() {
         List<Person> list = new ArrayList<Person>();
         list.add(sue);
-
         CoupleByCriteriaFinder finder = new CoupleByCriteriaFinder(list);
 
         Optional<Couple> couple = finder.find(Criteria.Closest);
@@ -58,7 +58,6 @@ public class CoupleByCriteriaFinderTests {
         List<Person> list = new ArrayList<Person>();
         list.add(mike);
         list.add(greg);
-
         CoupleByCriteriaFinder finder = new CoupleByCriteriaFinder(list);
 
         Couple couple = finder.find(Criteria.Farthest).get();
@@ -89,7 +88,6 @@ public class CoupleByCriteriaFinderTests {
         list.add(sarah);
         list.add(mike);
         list.add(greg);
-
         CoupleByCriteriaFinder finder = new CoupleByCriteriaFinder(list);
 
         Couple couple = finder.find(Criteria.Closest).get();
