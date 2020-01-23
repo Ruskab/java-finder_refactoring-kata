@@ -31,19 +31,13 @@ public class CoupleByCriteriaFinder {
             }
         }
 
-        if (coupleCombinations.isEmpty()) {
-            return Optional.empty();
-        }
-
-
-        Couple answer = coupleCombinations.get(0);
         switch (criteria) {
             case Closest:
                 return coupleCombinations.stream().min(Comparator.comparing(Couple::getDistance));
             case Farthest:
                 return coupleCombinations.stream().max(Comparator.comparing(Couple::getDistance));
             default:
-                return Optional.of(answer);
+                return Optional.empty();
         }
 
     }
