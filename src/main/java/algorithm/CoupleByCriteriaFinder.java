@@ -2,6 +2,7 @@ package algorithm;
 
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,32 +26,25 @@ public class CoupleByCriteriaFinder {
                     couple.youngest = people.get(j);
                     couple.oldest = people.get(i);
                 }
-                couple.distance = ChronoUnit.DAYS.between(couple.youngest.birthDate(), couple.oldest.birthDate());
+                couple.setDistance(ChronoUnit.DAYS.between(couple.youngest.birthDate(), couple.oldest.birthDate()));
                 coupleCombinations.add(couple);
             }
         }
 
-        if (coupleCombinations.size() < 1) {
+        if (coupleCombinations.isEmpty()) {
             return Optional.empty();
         }
 
-        Couple answer = coupleCombinations.get(0);
-        for (Couple potentialResult : coupleCombinations) {
-            switch (criteria) {
-                case Closest:
-                    if (potentialResult.distance < answer.distance) {
-                        answer = potentialResult;
-                    }
-                    break;
 
-                case Farthest:
-                    if (potentialResult.distance > answer.distance) {
-                        answer = potentialResult;
-                    }
-                    break;
-            }
+        Couple answer = coupleCombinations.get(0);
+        switch (criteria) {
+            case Closest:
+                return coupleCombinations.stream().min(Comparator.comparing(Couple::getDistance));
+            case Farthest:
+                return coupleCombinations.stream().max(Comparator.comparing(Couple::getDistance));
+            default:
+                return Optional.of(answer);
         }
 
-        return Optional.of(answer);
     }
 }
