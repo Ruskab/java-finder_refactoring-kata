@@ -1,17 +1,17 @@
 package algorithm;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Person {
     private String name;
-    private Date   birthDate;
+    private LocalDate birthDate;
 
-    public Person(String name, Date birthDate) {
-        this.name      = name;
+    public Person(String name, LocalDate birthDate) {
+        this.name = name;
         this.birthDate = birthDate;
     }
 
-    public Date birthDate() {
+    public LocalDate birthDate() {
         return birthDate;
     }
 }

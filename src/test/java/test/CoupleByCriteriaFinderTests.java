@@ -6,22 +6,22 @@ import algorithm.Criteria;
 import algorithm.Person;
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
 public class CoupleByCriteriaFinderTests {
-    Person sue   = new Person("Sue", new Date(50, 0, 1));
-    Person greg  = new Person("Greg", new Date(52, 5, 1));
-    Person sarah = new Person("Sarah", new Date(82, 0, 1));
-    Person mike  = new Person("Mike", new Date(79, 0, 1));
+    Person sue = new Person("Sue", LocalDate.of(50, 1, 1));
+    Person greg = new Person("Greg", LocalDate.of(52, 6, 1));
+    Person sarah = new Person("Sarah", LocalDate.of(82, 1, 1));
+    Person mike = new Person("Mike", LocalDate.of(79, 1, 1));
 
     @Test
     public void Returns_Empty_Couple_When_Given_Empty_List() {
-        List<Person>           list   = new ArrayList<Person>();
+        List<Person> list = new ArrayList<Person>();
         CoupleByCriteriaFinder finder = new CoupleByCriteriaFinder(list);
 
         Optional<Couple> couple = finder.find(Criteria.Closest);
