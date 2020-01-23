@@ -26,7 +26,6 @@ public class CoupleByCriteriaFinder {
                     couple.youngest = people.get(j);
                     couple.oldest = people.get(i);
                 }
-                couple.setDistance(ChronoUnit.DAYS.between(couple.youngest.birthDate(), couple.oldest.birthDate()));
                 coupleCombinations.add(couple);
             }
         }

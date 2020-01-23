@@ -1,15 +1,13 @@
 package algorithm;
 
+import java.time.temporal.ChronoUnit;
+
 public class Couple {
     public Person youngest;
     public Person oldest;
-    private long distance;
 
     public long getDistance() {
-        return distance;
+        return ChronoUnit.DAYS.between(youngest.birthDate(), oldest.birthDate());
     }
 
-    public void setDistance(long distance) {
-        this.distance = distance;
-    }
 }
