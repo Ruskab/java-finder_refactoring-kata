@@ -1,6 +1,7 @@
 package algorithm;
 
 import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 public class Couple {
     private Person youngest;
@@ -9,6 +10,20 @@ public class Couple {
     private Couple(Person youngest, Person oldest) {
         this.youngest = youngest;
         this.oldest = oldest;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Couple couple = (Couple) o;
+        return Objects.equals(youngest, couple.youngest) &&
+                Objects.equals(oldest, couple.oldest);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(youngest, oldest);
     }
 
     public static Couple create(Person person, Person person2) {

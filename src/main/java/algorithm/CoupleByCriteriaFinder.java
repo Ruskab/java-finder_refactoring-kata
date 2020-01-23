@@ -1,10 +1,10 @@
 package algorithm;
 
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CoupleByCriteriaFinder {
     private final List<Person> people;
@@ -14,13 +14,7 @@ public class CoupleByCriteriaFinder {
     }
 
     public Optional<Couple> find(Criteria criteria) {
-        List<Couple> coupleCombinations = new ArrayList<Couple>();
-
-        for (int i = 0; i < people.size() - 1; i++) {
-            for (int j = i + 1; j < people.size(); j++) {
-                coupleCombinations.add(Couple.create(people.get(i), people.get(j)));
-            }
-        }
+        List<Couple> coupleCombinations = people.stream().flatMap(person -> mapPossiblesCouples(person, people)).distinct().collect(Collectors.toList());
 
         switch (criteria) {
             case Closest:
@@ -31,5 +25,9 @@ public class CoupleByCriteriaFinder {
                 return Optional.empty();
         }
 
+    }
+
+    private Stream<Couple> mapPossiblesCouples(Person person, List<Person> candidates) {
+        return candidates.stream().filter(candidate -> !candidate.equals(person)).map(candidate -> Couple.create(person, candidate));
     }
 }
