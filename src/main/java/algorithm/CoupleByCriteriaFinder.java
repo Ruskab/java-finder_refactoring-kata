@@ -14,20 +14,20 @@ public class CoupleByCriteriaFinder {
         this.people = people;
     }
 
-    public Optional<Couple> find(Criteria criteria) {
-        List<Couple> coupleCombinations = people.stream().flatMap(person -> mapPossiblesCouples(person, people)).distinct().collect(toList());
+    public Optional<OrderedByAgeCouple> find(Criteria criteria) {
+        List<OrderedByAgeCouple> coupleCombinations = people.stream().flatMap(person -> mapPossiblesCouples(person, people)).distinct().collect(toList());
         switch (criteria) {
             case Closest:
-                return coupleCombinations.stream().min(comparing(Couple::getDistance));
+                return coupleCombinations.stream().min(comparing(OrderedByAgeCouple::getAgeDifference));
             case Farthest:
-                return coupleCombinations.stream().max(comparing(Couple::getDistance));
+                return coupleCombinations.stream().max(comparing(OrderedByAgeCouple::getAgeDifference));
             default:
                 return Optional.empty();
         }
 
     }
 
-    private Stream<Couple> mapPossiblesCouples(Person person, List<Person> candidates) {
-        return candidates.stream().filter(candidate -> !candidate.equals(person)).map(candidate -> Couple.create(person, candidate));
+    private Stream<OrderedByAgeCouple> mapPossiblesCouples(Person person, List<Person> candidates) {
+        return candidates.stream().filter(candidate -> !candidate.equals(person)).map(candidate -> OrderedByAgeCouple.create(person, candidate));
     }
 }
