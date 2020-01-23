@@ -49,8 +49,8 @@ public class CoupleByCriteriaFinderTests {
 
         Couple couple = finder.find(Criteria.Closest).get();
 
-        assertEquals(sue, couple.youngest);
-        assertEquals(greg, couple.oldest);
+        assertEquals(sue, couple.getYoungest());
+        assertEquals(greg, couple.getOldest());
     }
 
     @Test
@@ -63,8 +63,8 @@ public class CoupleByCriteriaFinderTests {
 
         Couple couple = finder.find(Criteria.Farthest).get();
 
-        assertEquals(greg, couple.youngest);
-        assertEquals(mike, couple.oldest);
+        assertEquals(greg, couple.getYoungest());
+        assertEquals(mike, couple.getOldest());
     }
 
     @Test
@@ -78,8 +78,8 @@ public class CoupleByCriteriaFinderTests {
 
         Couple couple = finder.find(Criteria.Farthest).get();
 
-        assertEquals(sue, couple.youngest);
-        assertEquals(sarah, couple.oldest);
+        assertEquals(sue, couple.getYoungest());
+        assertEquals(sarah, couple.getOldest());
     }
 
     @Test
@@ -94,7 +94,7 @@ public class CoupleByCriteriaFinderTests {
 
         Couple couple = finder.find(Criteria.Closest).get();
 
-        assertEquals(sue, couple.youngest);
-        assertEquals(greg, couple.oldest);
+        assertEquals(sue, couple.getYoungest());
+        assertEquals(greg, couple.getOldest());
     }
 }
