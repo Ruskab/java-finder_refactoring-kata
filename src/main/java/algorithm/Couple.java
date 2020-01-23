@@ -12,6 +12,26 @@ public class Couple {
         this.oldest = oldest;
     }
 
+    public static Couple create(Person person, Person person2) {
+        if (person.birthDate().isBefore(person2.birthDate())) {
+            return new Couple(person, person2);
+        } else {
+            return new Couple(person2, person);
+        }
+    }
+
+    public long getDistance() {
+        return ChronoUnit.DAYS.between(youngest.birthDate(), oldest.birthDate());
+    }
+
+    public Person getYoungest() {
+        return youngest;
+    }
+
+    public Person getOldest() {
+        return oldest;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -24,34 +44,5 @@ public class Couple {
     @Override
     public int hashCode() {
         return Objects.hash(youngest, oldest);
-    }
-
-    public static Couple create(Person person, Person person2) {
-        if (person.birthDate().isBefore(person2.birthDate())) {
-            return new Couple(person, person2);
-        } else {
-            return new Couple(person2, person);
-        }
-    }
-
-
-    public long getDistance() {
-        return ChronoUnit.DAYS.between(youngest.birthDate(), oldest.birthDate());
-    }
-
-    public void setYoungest(Person youngest) {
-        this.youngest = youngest;
-    }
-
-    public Person getYoungest() {
-        return youngest;
-    }
-
-    public void setOldest(Person oldest) {
-        this.oldest = oldest;
-    }
-
-    public Person getOldest() {
-        return oldest;
     }
 }

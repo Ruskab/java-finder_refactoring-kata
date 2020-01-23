@@ -1,10 +1,11 @@
 package algorithm;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
 
 public class CoupleByCriteriaFinder {
     private final List<Person> people;
@@ -14,13 +15,12 @@ public class CoupleByCriteriaFinder {
     }
 
     public Optional<Couple> find(Criteria criteria) {
-        List<Couple> coupleCombinations = people.stream().flatMap(person -> mapPossiblesCouples(person, people)).distinct().collect(Collectors.toList());
-
+        List<Couple> coupleCombinations = people.stream().flatMap(person -> mapPossiblesCouples(person, people)).distinct().collect(toList());
         switch (criteria) {
             case Closest:
-                return coupleCombinations.stream().min(Comparator.comparing(Couple::getDistance));
+                return coupleCombinations.stream().min(comparing(Couple::getDistance));
             case Farthest:
-                return coupleCombinations.stream().max(Comparator.comparing(Couple::getDistance));
+                return coupleCombinations.stream().max(comparing(Couple::getDistance));
             default:
                 return Optional.empty();
         }
