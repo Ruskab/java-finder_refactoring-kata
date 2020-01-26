@@ -1,8 +1,9 @@
 package test;
 
-import algorithm.OrderedByAgeCouple;
+import algorithm.CoupleByClosestCriteriaFinder;
 import algorithm.CoupleByCriteriaFinder;
-import algorithm.Criteria;
+import algorithm.CoupleByFarthestCriteriaFinder;
+import algorithm.OrderedByAgeCouple;
 import algorithm.Person;
 import org.junit.Test;
 
@@ -22,9 +23,9 @@ public class CoupleByCriteriaFinderTests {
     @Test
     public void Returns_Empty_Couple_When_Given_Empty_List() {
         List<Person> list = new ArrayList<Person>();
-        CoupleByCriteriaFinder finder = new CoupleByCriteriaFinder(list);
+        CoupleByCriteriaFinder finder = new CoupleByClosestCriteriaFinder();
 
-        Optional<OrderedByAgeCouple> couple = finder.find(Criteria.Closest);
+        Optional<OrderedByAgeCouple> couple = finder.find(list);
 
         assertEquals(Optional.empty(), couple);
     }
@@ -33,9 +34,9 @@ public class CoupleByCriteriaFinderTests {
     public void Returns_Empty_Couple_When_Given_One_Person() {
         List<Person> list = new ArrayList<Person>();
         list.add(sue);
-        CoupleByCriteriaFinder finder = new CoupleByCriteriaFinder(list);
+        CoupleByCriteriaFinder finder = new CoupleByClosestCriteriaFinder();
 
-        Optional<OrderedByAgeCouple> couple = finder.find(Criteria.Closest);
+        Optional<OrderedByAgeCouple> couple = finder.find(list);
 
         assertEquals(Optional.empty(), couple);
     }
@@ -45,9 +46,9 @@ public class CoupleByCriteriaFinderTests {
         List<Person> list = new ArrayList<Person>();
         list.add(sue);
         list.add(greg);
-        CoupleByCriteriaFinder finder = new CoupleByCriteriaFinder(list);
+        CoupleByCriteriaFinder finder = new CoupleByClosestCriteriaFinder();
 
-        OrderedByAgeCouple orderedByAgeCouple = finder.find(Criteria.Closest).get();
+        OrderedByAgeCouple orderedByAgeCouple = finder.find(list).get();
 
         assertEquals(sue, orderedByAgeCouple.getYoungest());
         assertEquals(greg, orderedByAgeCouple.getOldest());
@@ -58,9 +59,9 @@ public class CoupleByCriteriaFinderTests {
         List<Person> list = new ArrayList<Person>();
         list.add(mike);
         list.add(greg);
-        CoupleByCriteriaFinder finder = new CoupleByCriteriaFinder(list);
+        CoupleByCriteriaFinder finder = new CoupleByFarthestCriteriaFinder();
 
-        OrderedByAgeCouple orderedByAgeCouple = finder.find(Criteria.Farthest).get();
+        OrderedByAgeCouple orderedByAgeCouple = finder.find(list).get();
 
         assertEquals(greg, orderedByAgeCouple.getYoungest());
         assertEquals(mike, orderedByAgeCouple.getOldest());
@@ -73,9 +74,9 @@ public class CoupleByCriteriaFinderTests {
         list.add(sarah);
         list.add(mike);
         list.add(greg);
-        CoupleByCriteriaFinder finder = new CoupleByCriteriaFinder(list);
+        CoupleByCriteriaFinder finder = new CoupleByFarthestCriteriaFinder();
 
-        OrderedByAgeCouple orderedByAgeCouple = finder.find(Criteria.Farthest).get();
+        OrderedByAgeCouple orderedByAgeCouple = finder.find(list).get();
 
         assertEquals(sue, orderedByAgeCouple.getYoungest());
         assertEquals(sarah, orderedByAgeCouple.getOldest());
@@ -88,9 +89,9 @@ public class CoupleByCriteriaFinderTests {
         list.add(sarah);
         list.add(mike);
         list.add(greg);
-        CoupleByCriteriaFinder finder = new CoupleByCriteriaFinder(list);
+        CoupleByCriteriaFinder finder = new CoupleByClosestCriteriaFinder();
 
-        OrderedByAgeCouple orderedByAgeCouple = finder.find(Criteria.Closest).get();
+        OrderedByAgeCouple orderedByAgeCouple = finder.find(list).get();
 
         assertEquals(sue, orderedByAgeCouple.getYoungest());
         assertEquals(greg, orderedByAgeCouple.getOldest());
