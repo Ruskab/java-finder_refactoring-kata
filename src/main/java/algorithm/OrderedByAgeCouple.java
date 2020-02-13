@@ -33,16 +33,16 @@ public class OrderedByAgeCouple {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(youngest, oldest);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderedByAgeCouple orderedByAgeCouple = (OrderedByAgeCouple) o;
         return Objects.equals(youngest, orderedByAgeCouple.youngest) &&
                 Objects.equals(oldest, orderedByAgeCouple.oldest);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(youngest, oldest);
     }
 }
